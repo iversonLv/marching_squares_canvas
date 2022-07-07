@@ -1,2 +1,4 @@
-# marching_squares_canvas
-Created with CodeSandbox
+# Marching Squares Canvas
+
+![Showcase](./showcase.png)
+![Types](./marching_squares.jpg)
