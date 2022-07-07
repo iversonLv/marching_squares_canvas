@@ -1,6 +1,6 @@
-const CANVAS_WIDTH = 600;
-const CANVAS_HEIGHT = 400;
-const CELL_LENGTH = 100;
+const CANVAS_WIDTH = 1800;
+const CANVAS_HEIGHT = 800;
+const CELL_LENGTH = 50;
 const canvas = document.getElementById("canvas");
 canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
@@ -24,9 +24,16 @@ for (let i = 0; i < rows; i++) {
     if (i === 0) {
       y = i * CELL_LENGTH + 10;
     }
+    if (i === rows - 1) {
+      y = i * CELL_LENGTH - 3;
+    }
     if (j === cols - 1) {
       x = j * CELL_LENGTH - 6;
     }
+    if (j === 0) {
+      x = j * CELL_LENGTH + 4;
+    }
+    ctx.font = "15px Arial";
 
     // middle
     ctx.fillText(arr[i][j], x - 3, y + 2);
