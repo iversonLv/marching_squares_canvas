@@ -9,53 +9,53 @@ const rows = CANVAS_HEIGHT / CELL_LENGTH + 1;
 const cols = CANVAS_WIDTH / CELL_LENGTH + 1;
 
 const arr = [];
-for (let i = 0; i < rows; i++) {
-  arr[i] = [];
-  for (let j = 0; j < cols; j++) {
-    //console.log(i)
-    arr[i][j] = Math.floor(Math.random() * 2);
-    // ctx.fillRect(j * CELL_LENGTH, i * CELL_LENGTH, 1, 1)
-    // ctx.fillStyle = arr[i][j] ? 'black' : 'red';
-    // ctx.fill();
+for (let y = 0; y < rows; y++) {
+  arr[y] = [];
+  for (let x = 0; x < cols; x++) {
+    arr[y][x] = Math.floor(Math.random() * 2);
+    let pX, pY;
+    pX = x * CELL_LENGTH;
+    pY = y * CELL_LENGTH;
+    ctx.fillRect(pX - CELL_LENGTH, pY, 5, 5)
 
-    let x, y;
-    x = j * CELL_LENGTH;
-    y = i * CELL_LENGTH;
-    if (i === 0) {
-      y = i * CELL_LENGTH + 10;
+    if (y === 0) {
+      pY += 10;
     }
-    if (i === rows - 1) {
-      y = i * CELL_LENGTH - 3;
+    if (y === rows - 1) {
+      pY -= 3;
     }
-    if (j === cols - 1) {
-      x = j * CELL_LENGTH - 6;
+    if (x === cols - 1) {
+      pX -= 6;
     }
-    if (j === 0) {
-      x = j * CELL_LENGTH + 4;
+    if (x === 0) {
+      pX += 4;
     }
     ctx.font = "15px Arial";
+    ctx.fillStyle = arr[y][x] === 1 ? 'black' : 'white';
+    ctx.fill();
 
     // middle
-    ctx.fillText(arr[i][j], x - 3, y + 2);
+    ctx.fillText(arr[y][x], pX - 3, pY + 2);
   }
 }
 //console.log(arr)
 
-for (let i = 0; i < rows - 1; i++) {
-  for (let j = 0; j < cols - 1; j++) {
-    let x = i * CELL_LENGTH;
-    let y = j * CELL_LENGTH;
-    let a = { x: y + CELL_LENGTH / 2, y: x };
-    let b = { x: y + CELL_LENGTH, y: x + CELL_LENGTH / 2 };
-    let c = { x: y + CELL_LENGTH / 2, y: x + CELL_LENGTH };
-    let d = { x: y, y: x + CELL_LENGTH / 2 };
+for (let y = 0; y < rows - 1; y++) {
+  for (let x = 0; x < cols - 1; x++) {
+    let pY = y * CELL_LENGTH;
+    let pX = x * CELL_LENGTH;
+    let a = { x: pX + CELL_LENGTH / 2, y: pY };
+    let b = { x: pX + CELL_LENGTH,     y: pY + CELL_LENGTH / 2 };
+    let c = { x: pX + CELL_LENGTH / 2, y: pY + CELL_LENGTH };
+    let d = { x: pX,                   y: pY + CELL_LENGTH / 2 };
     //console.log(arr[x/100][y/100], arr[x/100][(y + CELL_LENGTH)/100], arr[(x + CELL_LENGTH)/100][(y + CELL_LENGTH)/100], arr[(x + CELL_LENGTH)/100][y/100])
     // there are 16 types of the drwaLine
+  
     const type = calType(
-      arr[x / CELL_LENGTH][y / CELL_LENGTH],
-      arr[x / CELL_LENGTH][(y + CELL_LENGTH) / CELL_LENGTH],
-      arr[(x + CELL_LENGTH) / CELL_LENGTH][(y + CELL_LENGTH) / CELL_LENGTH],
-      arr[(x + CELL_LENGTH) / CELL_LENGTH][y / CELL_LENGTH]
+      arr[pY / CELL_LENGTH]                [pX / CELL_LENGTH],
+      arr[pY / CELL_LENGTH]                [(pX + CELL_LENGTH) / CELL_LENGTH],
+      arr[(pY + CELL_LENGTH) / CELL_LENGTH][(pX + CELL_LENGTH) / CELL_LENGTH],
+      arr[(pY + CELL_LENGTH) / CELL_LENGTH][pX / CELL_LENGTH]
     );
 
     switch (type) {
